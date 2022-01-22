@@ -5,3 +5,56 @@
     clear: both;
   }
 }
+
+@mixin centerPage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// MEDIA QUERY MANAGER
+
+/* 
+0 - 600px: phone
+600 - 900px: Tablet portrait
+900 - 1200px: Tablet ladscape
+[1200-1800] is where normal styles apply
+1800px+ : Big Desktop
+
+$breakpoint argument choices:
+- phone
+- tablet-portrait
+- tablet-landscape
+- big-desktop
+
+ORDER: Base + Typeography > General Layour + Grid > Page Layout > Components...
+
+1em = 16px
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      @content;
+    } //600px
+  }
+
+  @if $breakpoint == tablet-portrait {
+    @media (max-width: 56.25em) {
+      @content;
+    } //900px
+  }
+
+  @if $breakpoint == tablet-landscape {
+    @media (max-width: 75em) {
+      @content;
+    } //1200px
+  }
+
+  @if $breakpoint == big-desktop {
+    @media (min-width: 112.5em) {
+      @content;
+    } //1800px
+  }
+}
